@@ -1,5 +1,5 @@
 def number(stops):
-    #return sum(map(lambda x: x[0] - x[1], stops))
+    return sum(map(lambda x: x[0] - x[1], stops))
 
     #return lambda b: sum(i - o for i, o in b)
     #return sum(i - o for i, o in stops)
