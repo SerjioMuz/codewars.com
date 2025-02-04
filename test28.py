@@ -1,4 +1,5 @@
 def reverse_words(text):
+    return ' '.join(map(lambda x: x[::-1], text.split(' ')))
 
 
 
