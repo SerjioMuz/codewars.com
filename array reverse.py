@@ -30,4 +30,12 @@ def array_rewerse4(lis):
     return lis
 
 
-print(array_rewerse4([1,2,3,4,5,'j',6,7,8,9,0]))
+def array_rewerse5(lis):
+    for index in range(((len(lis))//2-1),-1,-1):
+        temporary=lis[index]   #пришлось ввести временную переменную, без нее никак не сообразил.
+        lis[index]=lis[(len(lis))-1-index]
+        lis[(len(lis)) - 1 - index]=temporary
+    return lis
+
+
+print(array_rewerse5([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]))
