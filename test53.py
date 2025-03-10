@@ -5,4 +5,19 @@ def adder(**args):
         sum+=i
     print(sum)
 
-adder(z='q', x='w',c='e', v='r')
+#adder(z='q', x='w',c='e', v='r')
+
+def copyDict(**dict):
+    d=dict
+    dict2={}
+    for i in list(d.keys()):
+        dict2.update({i:dict[i]})
+
+    return dict2
+
+
+
+
+
+
+print(copyDict(z='q', x='w',c='e', v='r'))
