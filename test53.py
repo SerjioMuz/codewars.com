@@ -41,7 +41,17 @@ def f5(a,b=2,c=3): print(a,b,c)
 def f6(a,b=2,*c): print(a,b,c)
 #f6(1,3,4)
 
+def prime(y):
+    x=y//2
+    while x>1:
+        if y%x==0:
+            print(y, 'has factor', x)
+            break
+        x-=1
+    else:
+        print(y, 'is prime')
 
+prime(0)
 
 
 
