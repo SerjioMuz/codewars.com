@@ -1,3 +1,6 @@
+import math
+
+
 def adder(**args):
     l=list(args.values())
     sum=l[0]
@@ -51,7 +54,18 @@ def prime(y):
     else:
         print(y, 'is prime')
 
-prime(0)
+#prime(0)
+
+L=[2,4,9,16,25]
+L2=[]
+for i in L:
+    L2.append(math.sqrt(i))
+print(L2)
+
+print(list(map(lambda x: math.sqrt(x),[2,4,9,16,25])))
+print([math.sqrt(x) for x in [2,4,9,16,25]])
+gen=list(math.sqrt(x) for x in [2,4,9,16,25])
+print(gen)
 
 
 
