@@ -28,18 +28,18 @@ def addDict (dict1, dict2):
         return dict3
 
 
-print(addDict({4:'d',5:'e',6:'f'}, {1:'a',2:'b',3:'c'}))
-print(addDict([1,2,3],[4,5,6]))
+#print(addDict({4:'d',5:'e',6:'f'}, {1:'a',2:'b',3:'c'}))
+#print(addDict([1,2,3],[4,5,6]))
 
 
+def f4(a,*b,**c): print(a,b,c)
+#f4(1,2,3, x=2, y=3)
 
+def f5(a,b=2,c=3): print(a,b,c)
+#f5(1,4)
 
-
-
-
-
-
-
+def f6(a,b=2,*c): print(a,b,c)
+#f6(1,3,4)
 
 
 
