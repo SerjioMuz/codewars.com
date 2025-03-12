@@ -82,7 +82,6 @@ def fact1(n):
     if n ==1:
         return 1
     return fact1(n - 1) * n
-
 print(fact1(1000))
 
 def fact2(n):
@@ -101,4 +100,39 @@ def fact4(n):
     import math
     return math.factorial(n)
 
-print(fact4(1000))
+#print(fact4(1000))
+
+import math
+import timeit
+print(min(timeit.repeat(number=1000, repeat=5, stmt=
+"""def fact3(n):
+    sum=1
+    for  i in range(1,n+1):
+        sum*=i
+    return sum
+fact3(1000)""")))
+
+import timeit
+print(min(timeit.repeat(number=1000, repeat=5, stmt=
+"""def fact2(n):
+    from functools import reduce
+    return reduce((lambda x,y:x*y), list(range(1,n+1)))
+fact2(1000)""")))
+
+import timeit
+print(min(timeit.repeat(number=1000, repeat=5, stmt=
+"""def fact1(n):
+    if n ==1:
+        return 1
+    return fact1(n - 1) * n
+fact1(1000)""")))
+
+import timeit
+print(min(timeit.repeat(number=1000, repeat=5, stmt=
+"""def fact3(n):
+    return n*i for i in range(1,n+1)
+fact3(1000)""")))
+
+def fact3(n):
+    return [n*i for i in range(n, 1, -1)]
+print(fact3(5))
