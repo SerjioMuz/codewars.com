@@ -67,6 +67,10 @@ def prime(y):
 #gen=list(math.sqrt(x) for x in [2,4,9,16,25])
 #print(gen)
 
+import sys
+
+sys.setrecursionlimit(3000)
+
 def countdown(x):
     if x >0:
         print(x)
@@ -74,4 +78,27 @@ def countdown(x):
 
 #countdown(5)
 
+def fact1(n):
+    if n ==1:
+        return 1
+    return fact1(n - 1) * n
 
+print(fact1(1000))
+
+def fact2(n):
+    from functools import reduce
+    return reduce((lambda x,y:x*y), list(range(1,n+1)))
+print(fact2(1000))
+
+def fact3(n):
+    sum=1
+    for  i in range(1,n+1):
+        sum*=i
+    return sum
+print(fact3(1000))
+
+def fact4(n):
+    import math
+    return math.factorial(n)
+
+print(fact4(1000))
