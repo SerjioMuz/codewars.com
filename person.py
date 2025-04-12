@@ -10,6 +10,9 @@ class Person:
     def giveRaise(self, persent):
         self.pay = int(self.pay * (1 + persent))
 
+    def __repr__(self):
+        return '[Person: %s, %s]' % (self.name, self.pay)
+
 
 if __name__ == '__main__':
     bob = Person('Bob Smith')
@@ -18,4 +21,6 @@ if __name__ == '__main__':
     print(sue.name, sue.pay)
     print(bob.lastName(), sue.lastName())
     sue.giveRaise(.10)
-    print(sue.pay)
+    print(sue)
+    print(bob)
+
