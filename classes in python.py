@@ -20,3 +20,10 @@ class ThirdClass(SecondClass):
         self.data *=other
 
 
+class Person:
+    def __init__(self, name, jobs, age=None):
+        self.name=name
+        self.jobs=jobs
+        self.age=age
+    def info(self):
+        return(self.name, self.jobs)
