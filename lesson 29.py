@@ -5,3 +5,6 @@ class MixedNames:
     def display(self):
         print(self.data, MixedNames.data)
 
+
+
+
