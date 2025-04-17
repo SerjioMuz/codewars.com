@@ -12,3 +12,14 @@ class NextClass:
         print(self.message)
 
 
+class Super:
+    def method(self):
+        print('in Super.method')
+
+class Sub(Super):
+    def method(self):
+        print('standart Sub.method')
+        Super.method(self)
+        print('ending Sub.method')
+
+
