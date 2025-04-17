@@ -12,7 +12,7 @@ class NextClass:
         print(self.message)
 
 
-class Super:
+"""class Super:
     def method(self):
         print('in Super.method')
 
@@ -20,6 +20,15 @@ class Sub(Super):
     def method(self):
         print('standart Sub.method')
         Super.method(self)
-        print('ending Sub.method')
+        print('ending Sub.method')"""
 
 
+class Super:
+    def delegate(self):
+        self.action()
+    def action(self):
+        raise NotImplementedError ('action must be defined')
+
+
+class Sub(Super):
+    def action(self): print('spam')
