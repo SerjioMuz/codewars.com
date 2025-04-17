@@ -6,5 +6,9 @@ class MixedNames:
         print(self.data, MixedNames.data)
 
 
+class NextClass:
+    def printer(self, text):
+        self.message=text
+        print(self.message)
 
 
