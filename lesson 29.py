@@ -36,3 +36,4 @@ class Super(metaclass=ABCMeta):
 
 class Sub(Super):
     def action(self): print('spam')
+
