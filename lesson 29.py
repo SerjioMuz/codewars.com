@@ -1,3 +1,6 @@
+from abc import abstractmethod
+
+
 class MixedNames:
     data='spam'
     def __init__(self, value):
@@ -23,11 +26,12 @@ class Sub(Super):
         print('ending Sub.method')"""
 
 
-class Super:
+class Super(metaclass=ABCMeta):
     def delegate(self):
         self.action()
+    @abstractmethod
     def action(self):
-        raise NotImplementedError ('action must be defined')
+        pass
 
 
 class Sub(Super):
