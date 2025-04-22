@@ -20,3 +20,8 @@ class Indexer:
 class C:
     def __index__(self):
         return 255
+
+class StepperIndex:
+    def __getitem__(self, i):
+        return self.data[i]
+
