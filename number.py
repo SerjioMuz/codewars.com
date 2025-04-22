@@ -5,6 +5,18 @@ class Number:
         return Number(self.data-other)
 
 class Indexer:
+    data=[5,6,7,8,9]
     def __getitem__(self, index):
-        return index**2
+        print('getitem:', index)
+        return self.data[index]
 
+class Indexer:
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            print('indexing', index)
+        else:
+            print('slicing', index.start, index.stop, index.step)
+
+class C:
+    def __index__(self):
+        return 255
