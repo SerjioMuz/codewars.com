@@ -1,4 +1,4 @@
-class Sguares:
+class Squares:
     def __init__(self, start, stop):
         self.value=start-1
         self.stop=stop
