@@ -30,3 +30,10 @@ if __name__ == '__main__':
 def gen(x):
     for i in range(x): yield i**2
 
+class Squares:
+    def __init__(self, start, stop):
+        self.start=start
+        self.stop=stop
+    def __iter__(self):
+        for value in range(self.start, self.stop+1):
+            yield value **2
