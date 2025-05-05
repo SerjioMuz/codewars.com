@@ -19,7 +19,7 @@ class Server(Employee):
     def __init__(self, name):
         Employee.__init__(self, name, 40000)
     def work(self):
-        print(self.name, 'intrfaces with customer')
+        print(self.name, 'interfaces with customer')
 
 class PizzaRobot(Chef):
     def __init__(self, name):
