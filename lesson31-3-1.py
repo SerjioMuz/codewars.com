@@ -6,5 +6,5 @@ class Uppercase(Processor):
 
 if __name__=='__main__':
     import sys
-    obj=Uppercase(open('trispam.txt'), sys.stdout)
+    obj=Uppercase(open('trispam.txt'), open('trispamup.txt', 'w'))
     obj.process()
