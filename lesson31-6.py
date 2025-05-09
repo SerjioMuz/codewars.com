@@ -28,3 +28,9 @@ class Product:
         self.val=val
     def method(self, arg):
         return self.val*arg
+
+class Negate:
+    def __init__(self, val):
+        self.val=-val
+    def __repr__(self):
+        return str(self.val)
