@@ -34,3 +34,32 @@ class Sub(Super, ListInstance):
 if __name__ == "__main__":
     x=Sub()
     print(x)
+
+"Файл testmixin.py"
+import importlib
+def tester(Listerclass, sept=False):
+    class Super:
+        def __init__(self):
+            self.data1='spam'
+        def ham(self):
+            pass
+    class Sub(Super, Listerclass):
+        def __init__(self):
+            Super.__init__(self)
+            self.data2 = 'eggs'
+            self.data3 = 42
+
+        def spam(self):
+            pass
+    instanse=Sub()
+    print(instanse)
+    if sept: print('-' *80)
+
+def testByNames(modname, classname, sept=False):
+    modobject=importlib.import_module(modname)
+    listerclass=getattr(modobject, classname)
+    tester(listerclass,sept)
+if __name__=='__main__':
+    testByNames('listinstance', 'ListInstance', True)
+    testByNames('listinherited', 'ListInherited', True)
+    testByNames('listtree', 'ListTree', False)
