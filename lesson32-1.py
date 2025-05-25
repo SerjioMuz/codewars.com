@@ -71,3 +71,15 @@ if __name__=='__main__':
     print(x&y, x|y)
     x.reverse(); print(x)
 
+class C:
+    data='spam'
+    def __getattr__(self, name):
+        print(name)
+        return getattr(self.data, name)
+
+class C(object):
+    data='spam'
+    def __getattr__(self, name):
+        print('getattr:' + name)
+        return getattr(self.data, name)
+
