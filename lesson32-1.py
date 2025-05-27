@@ -89,4 +89,11 @@ class C(object):
         print('add: '+other)
         return getattr(self.data, '__add__')(other)
 
+class A:
+    def meth(s): print('A.meth')
+class C(A):
+    def meth(s): print('C.meth')
+class B(A):
+    pass
+class D(B,C): pass
 
