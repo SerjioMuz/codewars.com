@@ -28,7 +28,7 @@ def mapattrs(instance, withobject=False, bysource=False):
     inherits=inheritance(instance)
     for attr in dir(instance):
         for obj in inherits:
-            if hasattr(obj, '__dict__') and arrt in obj.__dict__:
+            if hasattr(obj, '__dict__') and attr in obj.__dict__:
                 attr2obj[attr]=obj
                 break
     if not withobject:
