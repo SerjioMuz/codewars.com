@@ -17,6 +17,8 @@ def dflr(cls):
         here+=dflr(sup)
     return here
 
+
+
 def inheritance(instance):
     if hasattr(instance.__class__, '__mro__'):
         return (instance,) + instance.__class__.__mro__
