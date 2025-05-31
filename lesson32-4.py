@@ -8,4 +8,8 @@ class operators:
 class properties(object):
     def getage(self):
         return 40
-    age=property(getage, None, None, None)
+    def setage(self, value):
+        print('set age: %s' % value)
+        self._age=value
+    age=property(getage, setage, None, None)
+
