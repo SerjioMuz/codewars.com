@@ -25,3 +25,9 @@ class operators:
             self.__dict__['_age']=value
         else:
             self.__dict__[name]=value
+
+class AgeDesc(object):
+    def __get__(self, instance, owner): return 40
+    def __set__(self, instance, value): instance._age=value
+class descriptors(object):
+    age=AgeDesc()
