@@ -13,3 +13,15 @@ class properties(object):
         self._age=value
     age=property(getage, setage, None, None)
 
+class operators:
+    def __getattr__(self, name):
+        if name=='age':
+            return 40
+        else:
+            raise AttributeError(name)
+    def __setattr__(self, name, value):
+        print('set: %s %s' % (name, value))
+        if name=='age':
+            self.__dict__['_age']=value
+        else:
+            self.__dict__[name]=value
