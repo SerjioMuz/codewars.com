@@ -31,3 +31,11 @@ class AgeDesc(object):
     def __set__(self, instance, value): instance._age=value
 class descriptors(object):
     age=AgeDesc()
+
+"spam_class.py"
+class Spam:
+    numInstances=0
+    def __init__(self):
+        Spam.numInstances=Spam.numInstances+1
+    def printNumInstances():
+        print('Number of instances created: %s' % Spam.numInstances)
