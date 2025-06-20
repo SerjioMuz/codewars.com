@@ -32,10 +32,36 @@ class AgeDesc(object):
 class descriptors(object):
     age=AgeDesc()
 
-"spam_class.py"
+"Файл spam_class.py"
 class Spam:
     numInstances=0
     def __init__(self):
         Spam.numInstances=Spam.numInstances+1
-    def printNumInstances():
+    def printNumInstances(self):
         print('Number of instances created: %s' % Spam.numInstances)
+
+
+"Файл bothmethods.py"
+class Methods:
+    def imeth(self, x):
+        print([self, x])
+    def smeth(x):
+        print([x])
+    def cmeth(cls,x):
+        print(cls,x)
+    smeth=staticmethod(smeth)
+    cmeth=classmethod(cmeth)
+
+"Файл spam_static.py"
+class Spam:
+    numInstances=0
+    def __init__(self):
+        Spam.numInstances +=1
+    def printNumInstances():
+        print('Number of instances: %s' % Spam.numInstances)
+    printNumInstances=staticmethod(printNumInstances)
+class Sub(Spam):
+    def printNumInstances():
+        print('Extra stuff...')
+        Spam.printNumInstances()
+    printNumInstances=staticmethod(printNumInstances)
