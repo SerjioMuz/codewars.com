@@ -72,6 +72,67 @@ class Spam:
     def __init__(self):
         Spam.numInstances +=1
     def printNumInstances(cls):
-        print('Number of instances: %s' % cls.numInstances)
+        print('Number of instances: %s %s' % (cls.numInstances, cls))
     printNumInstances=classmethod(printNumInstances)
+class Sub(Spam):
+    def printNumInstances(cls):
+        print('Extra stuff...', cls)
+        Spam.printNumInstances()
+    printNumInstances=classmethod(printNumInstances)
+class Other(Spam): pass
+
+
+class Spam():
+    numInstances = 0
+    def count(cls):
+        cls.numInstances+=1
+    def __init__(self):
+        self.count()
+    count=classmethod(count)
+class Sub(Spam):
+    numInstances = 0
+    def __init__(self):
+        Spam.__init__(self)
+class Other(Spam):
+    numInstances = 0
+
+class Spam():
+    numInstances = 0
+    def __init__(self):
+        Spam.numInstances=Spam.numInstances + 1
+    @staticmethod
+    def printNumInstances():
+        print('Number of instances created: %s' % Spam.numInstances)
+
+
+"Файл bothmethods_decorators.py"
+class Methods(object):
+    def imeth(self, x):
+        print([self,x])
+    @staticmethod
+    def smeth(x):
+        print(x)
+    @classmethod
+    def cmeth(cls, x):
+        print([cls, x])
+    @property
+    def name(self):
+        return 'Bob '+self.__class__.__name__
+
+
+"Файл tracer1.py"
+class tracer:
+    def __init__(self, func):
+        self.calls=0
+        self.func=func
+    def __call__(self, *args):
+        self.calls+=1
+        print('call %s to $c' % (self.calls, self.func.__name__))
+        return self.func(*args)
+    @tracer
+    def spam(a,b,c):
+        return a+b+c
+    print (spam(1,2,3))
+    print(spam('a', 'b', 'c'))
+
 
