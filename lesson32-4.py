@@ -1,3 +1,4 @@
+
 class operators:
     def __getattr__(self, name):
         if name=='age':
@@ -127,12 +128,35 @@ class tracer:
         self.func=func
     def __call__(self, *args):
         self.calls+=1
-        print('call %s to $c' % (self.calls, self.func.__name__))
+        print('call %s to %s' % (self.calls, self.func.__name__))
         return self.func(*args)
     @tracer
-    def spam(a,b,c):
+    def spam(self,a,b,c):
         return a+b+c
-    print (spam(1,2,3))
-    print(spam('a', 'b', 'c'))
+x=tracer()
+print(x.spam(1,2,3))
+print(x.spam('a', 'b', 'c'))
 
 
+def tracer(func):
+    def oncall(*args):
+        oncall.calls +=1
+        print('call %s to %s' % (oncall.calls, func.__name__))
+        return func(*args)
+    oncall.calls=0
+    return oncall
+class C:
+    @tracer
+    def spam(self, a,b,c): return a+b+c
+x=C()
+print(x.spam(1,2,3))
+print(x.spam('a','b','c'))
+
+
+class C:
+    def act(self):
+        print('spam')
+class D(C):
+    def act(self):
+        C.act(self)
+        print('eggs')
