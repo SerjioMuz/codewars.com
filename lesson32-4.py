@@ -153,10 +153,10 @@ print(x.spam(1,2,3))
 print(x.spam('a','b','c'))
 
 
+class A:
+    def act(self): print('A')
+class B:
+    def act(self): print('B')
 class C:
     def act(self):
-        print('spam')
-class D(C):
-    def act(self):
         super().act()
-        print('eggs')
