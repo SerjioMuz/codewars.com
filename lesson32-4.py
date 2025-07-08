@@ -158,5 +158,5 @@ class C:
         print('spam')
 class D(C):
     def act(self):
-        C.act(self)
+        super().act()
         print('eggs')
