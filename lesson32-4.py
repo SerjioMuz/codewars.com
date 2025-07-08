@@ -157,6 +157,6 @@ class A:
     def act(self): print('A')
 class B:
     def act(self): print('B')
-class C:
+class C(A):
     def act(self):
         super().act()
