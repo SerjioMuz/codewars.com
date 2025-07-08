@@ -160,3 +160,13 @@ class B:
 class C(A):
     def act(self):
         super().act()
+
+class C:
+    def __getitem__(self, ix):
+        print('C index')
+class D(C):
+    def __getitem__(self, ix):
+        print('D index')
+        C.__getitem__(self, ix)
+        super().__getitem__(ix)
+        super() [ix]
