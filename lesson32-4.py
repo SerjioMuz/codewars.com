@@ -170,3 +170,12 @@ class D(C):
         C.__getitem__(self, ix)
         super().__getitem__(ix)
         super() [ix]
+
+
+class X:
+    def m(self): print('X.m')
+class Y:
+    def m(self): print('Y.m')
+class C(X):
+    def m(self): super().m()
+
