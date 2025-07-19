@@ -99,3 +99,17 @@ class MyListSub(MyList):
         return  MyList.__add__(self, other)
     def stats(self):
         return self.calls, self.adds
+
+
+
+
+
+
+class Attrs:
+    def __getattr__(self, name):
+        print('get %s' % name)
+    def __setattr__(self, name, value):
+        print('set %s %s' % (name, value))
+
+
+
