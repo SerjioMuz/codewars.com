@@ -112,4 +112,22 @@ class Attrs:
         print('set %s %s' % (name, value))
 
 
+"Файл multiset.py"
+from setwrapper import Set
+class MultiSet(Set):
+    def intersect(self, *others):
+        res=[]
+        for x in self:
+            for other in others:
+                if x not in other: break
+            else:
+                res.append(x)
+        return Set(res)
+    def union(*args):
+        res=[]
+        for seg in args:
+            for x in seg:
+                if not x in res:
+                    res.append(x)
+        return Set(res)
 
