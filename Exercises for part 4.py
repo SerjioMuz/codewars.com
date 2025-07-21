@@ -212,3 +212,25 @@ class Primate(Mammal):
 
 class Hacker(Primate): pass
 
+
+
+
+
+class Scene:
+    def __init__(self):
+        self.cust=Customer
+        self.cler=Clerk
+        self.parr=Parrot
+    def action(self):
+        self.cust.line(self.cust)
+        self.cler.line(self.cler)
+        self.parr.line(self.parr)
+
+class Customer:
+    def line(self): print('CUSTOMER')
+
+class Clerk:
+    def line(self): print('CLERK')
+
+class Parrot:
+    def line(self): print('PARROT')
