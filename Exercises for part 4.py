@@ -190,3 +190,25 @@ if __name__=='__main__':
     x=Lunch()
     x.order('spam')
     x.result()
+
+
+class Animal:
+    def speak(self): print('AnimalXXX')
+    def reply(self):
+        self.speak()
+    def www(self): print('rrrrrrrrrrrrrrrrrrrrrrrrrr')
+
+class Mammal(Animal):
+    def speak(self): print('MammalXXX')
+
+class Cat(Mammal):
+    def speak(self): print('CatXXX')
+
+class Dog(Mammal):
+    def speak(self): print('DogXXX')
+
+class Primate(Mammal):
+    def speak(self): print('PrimateXXX')
+
+class Hacker(Primate): pass
+
