@@ -234,3 +234,29 @@ class Clerk:
 
 class Parrot:
     def line(self): print('PARROT')
+
+
+class Scene:
+    def __init__(self):
+        self.cust=Customer()
+        self.cler=Clerk()
+        self.parr=Parrot()
+    def action(self):
+        self.cust.line()
+        self.cler.line()
+        self.parr.line()
+class Actor:
+    def line(self):
+        print(self.name + ':', repr(self.says()))
+
+class Customer(Actor):
+    name="CUSTOMER"
+    def says(self): return "CUSTOMER XXXXX"
+
+class Clerk(Actor):
+    name = "CLERK"
+    def says(self): return "CLERC XXXXX"
+
+class Parrot(Actor):
+    name = "PARROT"
+    def says(self): return "PARROT XXXXX"
