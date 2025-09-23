@@ -52,3 +52,16 @@ try:
 except IndexError:
     print('propagating')
     raise
+
+try:
+    1/0
+except Exception as E:
+    raise TypeError('Bad') from E
+
+def f(x):
+    assert x<0, 'x must be negative'
+    return x**2
+
+def reciprocal(x):
+    assert x !=0
+    return 1/x
