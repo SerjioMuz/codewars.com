@@ -65,3 +65,32 @@ def f(x):
 def reciprocal(x):
     assert x !=0
     return 1/x
+
+"Файл withas.py"
+class TraceBlock:
+    def message(self, arg):
+        print('running' + arg)
+    def __enter__(self):
+        print('starting with block')
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is None:
+            print('exited normally\n')
+        else:
+            print('raise an exception!' + str(exc_type))
+            return False
+
+if __name__=='__main__':
+    with TraceBlock() as action:
+        action.message('test1')
+        print('reached')
+    with TraceBlock() as action:
+        action.message('test2')
+        raise TypeError
+        print('not reached')
+
+
+
+with open('script1.py') as f1, open('script2.py') as f2:
+    for pair in zip(f1,f2):
+        print(pair)
