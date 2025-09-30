@@ -49,3 +49,27 @@ if __name__=='__main__':
         parser()
     except FormatError as exc:
         exc.logerror()
+
+"Файл nestexc.py"
+def action2():
+    print(1+[])
+def action1():
+    try:
+        action2()
+    except TypeError:
+        print('inner try')
+
+try:
+    action1()
+except TypeError:
+    print('outer try')
+
+
+
+try:
+    try:
+        raise IndexError
+    finally:
+        print('spam')
+finally:
+    print('SPAM')
