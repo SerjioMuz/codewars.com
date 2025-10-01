@@ -64,8 +64,6 @@ try:
 except TypeError:
     print('outer try')
 
-
-
 try:
     try:
         raise IndexError
@@ -73,3 +71,37 @@ try:
         print('spam')
 finally:
     print('SPAM')
+
+
+
+class ExitLoop(Exception): pass
+try:
+    while True:
+        while True:
+            for i in range (10):
+                if i > 3: raise ExitLoop
+                print('loop3: %s' % i)
+            print('loop2')
+        print('loop')
+except ExitLoop:
+    print('continuing')
+
+
+"Файл exiter.py"
+import sys
+def bye():
+    sys.exit(40)
+try:
+    bye()
+except Exception:
+    print('got it')
+print('continuing')
+
+mydictionary={}
+print('OK1')
+try:
+    x=mydictttttionary['spam']
+except KeyError:
+    x=None
+    print('OK2')
+print('OK3')
