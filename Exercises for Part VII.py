@@ -18,6 +18,6 @@ def doomed():
     except IndexError:
         print ("ERROR1")
     except MyError as x:
-        print('ERROR2', x)
+        print('ERROR2',MyError, x)
     else:
         print('OK')
