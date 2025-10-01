@@ -3,7 +3,7 @@ def oops():
     return 'spam'[4]
 try:
     oops()
-except IndexError:
+except KeyError:
     print ("ERROR")
 else:
     print('OK')
