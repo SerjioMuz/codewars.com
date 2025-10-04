@@ -42,11 +42,11 @@ for crsdir in sys.path:
             if filename.endswith('.py'):
                 pypath=os.path.join(thisDir, filename)
                 try:
-                    pysize=os.path.getsize(pypath)
+                   pysize=os.path.getsize(pypath)
                 except:
-                    print('skipping', pypath)
+                   print('skipping', pypath)
                 allsizes.append((pysize, pypath))
 allsizes.sort()
-pprint.pprint(allsize[:3])
-pprint.pprint(allsize[-3:])
+pprint.pprint(allsizes[:3])
+pprint.pprint(allsizes[-3:])
 
