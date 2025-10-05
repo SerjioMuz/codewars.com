@@ -60,3 +60,37 @@ for line in open(filename):
         sums[ix]=sums.get(ix,0)+num
 for key in sorted(sums):
     print(key, '=', sums[key])
+
+
+"Exercise 4 Суммирование столбцов в текстовом файле с разделителями-запятыми, списки вместо словарей"
+import sys
+filename = sys.argv[1]
+numcols=int(sys.argv[2])
+totals=[0]*numcols
+for line in open(filename):
+    cols=line.split(',')
+    nums=[int(x) for x in cols]
+    totals=[(x+y) for (x,y) in zip(totals, nums)]
+print(totals)
+
+
+"Exercise 5 Проверка возвращения в предыдущее состояние вывода для набора сценариев"
+import os
+testscripts=[dict(script='test1.py', args=''),
+dict(script='test2.py', args='spam')]
+for testcase in testscripts:
+    commandline='%(script)s %(args)s' % testcase
+    output=os.popen(commandline).read()
+    result=testcase['script']+'.result'
+    if not os.path.exists(result):
+        open(result, 'w').write(output)
+        print('Created:', result)
+    else:
+        priorresult=open(result).read()
+        if output != priorresult:
+            print('FAILED:', testcase['script'])
+            print(output)
+        else:
+            print('Passed:', testcase['script'])
+
+
