@@ -97,32 +97,46 @@ for testcase in testscripts:
 "Exercise 6 Построение графического пользовательского интерфейса"
 from tkinter import *
 import random
-fontsize=25
-colors=['red', 'green', 'blue', 'yellow', 'orange', 'white', 'cyan', 'purple']
+import pygame
+
+pygame.mixer.init()
+fontsize = 25
+colors = ['red', 'green', 'blue', 'yellow', 'orange', 'white', 'cyan', 'purple']
+
 
 def reply(text):
     print(text)
-    popup=Toplevel()
-    color=random.choice(colors)
-    Label(popup, text='Popup', bg='black', fg=color).pack()
+    popup = Toplevel()
+    color = random.choice(colors)
+    Label(popup, text='Popup', bg=random.choice(colors), fg=color).pack()
     L.config(fg=color)
 
+
 def timer():
-    L.config(fg=random.choise(colors))
+    L.config(fg=random.choice(colors))
     win.after(250, timer)
+
 
 def grow():
     global fontsize
-    fontsize +=5
+    fontsize += 1
     L.config(font=('arial', fontsize, 'italic'))
     win.after(100, grow)
 
-win=Tk()
-L=Label(win, text='spam',
-        font=('arial', fontsize, 'italic'), fg='yellow', bg='navy',
-        relief=RAISED)
+
+def sound():
+    sound = pygame.mixer.Sound('C:\Alarm09.wav')
+    sound.play()
+
+
+win = Tk()
+L = Label(win, text='ПРИВЕТrrrrrr',
+          font=('tahoma', fontsize, 'italic'), fg='yellow', bg='navy',
+          relief=RAISED)
 L.pack(side=TOP, expand=YES, fill=BOTH)
 Button(win, text="press", command=(lambda: reply('red'))).pack(side=BOTTOM, fill=X)
-Button(win, text='timer', command='timer').pack(side=BOTTOM, fill=X)
-Button(win, text='grow', command='grow').pack(side=BOTTOM, fill=X)
+Button(win, text='timer', command=timer).pack(side=BOTTOM, fill=X)
+Button(win, text='grow', command=grow).pack(side=BOTTOM, fill=X)
+Button(win, text='sound', command=sound).pack(side=BOTTOM, fill=X)
+
 win.mainloop()
