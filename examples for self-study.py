@@ -98,6 +98,7 @@ for testcase in testscripts:
 from tkinter import *
 import random
 import pygame
+import datetime
 
 pygame.mixer.init()
 fontsize = 25
@@ -129,6 +130,13 @@ def sound():
     sound.play()
 
 
+def datatime():
+    datatime = Toplevel()
+    color = 'red'
+    Label(datatime, text=datetime.datetime.now(), bg='blue', fg=color).pack()
+    L.config(fg=color)
+
+
 win = Tk()
 L = Label(win, text='ПРИВЕТrrrrrr',
           font=('tahoma', fontsize, 'italic'), fg='yellow', bg='navy',
@@ -138,5 +146,8 @@ Button(win, text="press", command=(lambda: reply('red'))).pack(side=BOTTOM, fill
 Button(win, text='timer', command=timer).pack(side=BOTTOM, fill=X)
 Button(win, text='grow', command=grow).pack(side=BOTTOM, fill=X)
 Button(win, text='sound', command=sound).pack(side=BOTTOM, fill=X)
+Button(win, text='datatime', command=datatime).pack(side=BOTTOM, fill=X)
 
 win.mainloop()
+
+
