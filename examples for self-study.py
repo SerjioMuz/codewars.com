@@ -151,3 +151,88 @@ Button(win, text='datatime', command=datatime).pack(side=BOTTOM, fill=X)
 win.mainloop()
 
 
+"Exercise 6 Построение графического пользовательского интерфейса с использованием классов"
+from tkinter import *
+import random
+import pygame
+import datetime
+
+pygame.mixer.init()
+
+
+class MyGui:
+    colors = ['red', 'green', 'blue', 'yellow', 'orange', 'white', 'cyan', 'purple']
+
+    def __init__(self, parent, title='popup'):
+        parent.title(title)
+        self.growing = False
+        self.fontsize = 10
+        self.lab = Label(parent, text='Guil', fg='white', bg='navy')
+        self.lab.pack(expand=YES, fill=BOTH)
+        Button(parent, text='Spam', command=self.reply).pack(side=LEFT)
+        Button(parent, text='Grow', command=self.grow).pack(side=LEFT)
+        Button(parent, text='Stop', command=self.stop).pack(side=LEFT)
+        Button(parent, text='Sound', command=self.sound).pack(side=LEFT)
+
+    def reply(self):
+        self.fontsize += 5
+        color = random.choice(self.colors)
+        self.lab.config(bg=color, font=('courier', self.fontsize, 'bold italic'))
+
+    def grow(self):
+        self.growing = True
+        self.grower()
+
+    def grower(self):
+        if self.growing:
+            self.fontsize += 5
+            self.lab.config(font=('courier', self.fontsize, 'bold'))
+            self.lab.after(500, self.grower)
+
+    def sound(self):
+        sound = pygame.mixer.Sound('C:\Alarm09.wav')
+        sound.play()
+
+    def stop(self):
+        self.growing = False
+
+
+class MySubGui(MyGui):
+    colors = ['black', 'purple']
+
+    def grower(self):
+        if self.growing:
+            self.fontsize += 20
+            self.lab.config(font=('courier', self.fontsize, 'bold'))
+            self.lab.after(500, self.grower)
+
+    def sound(self):
+        sound = pygame.mixer.Sound('C:\Alarm08.wav')
+        sound.play()
+
+
+class MySubCui2(MyGui):
+    def __init__(self, parent, title='tttttt'):
+        self.growing = False
+        self.fontsize = 10
+        self.lab = Label(parent, text='Guil', fg='white', bg='navy')
+        self.lab.pack(expand=YES, fill=BOTH)
+        Button(parent, text='datatime', command=self.datatime).pack(side=LEFT)
+        Button(parent, text='Spam', command=self.reply).pack(side=LEFT)
+        Button(parent, text='Grow', command=self.grow).pack(side=LEFT)
+        Button(parent, text='Stop', command=self.stop).pack(side=LEFT)
+        Button(parent, text='Sound', command=self.sound).pack(side=LEFT)
+
+    def datatime(self):
+        datatime = Toplevel()
+        color = 'red'
+        Label(datatime, text=datetime.datetime.now(), bg='blue', fg=color).pack()
+
+
+#        L.config(fg=color)
+
+MyGui(Tk(), 'main')
+MyGui(Toplevel())
+MySubGui(Toplevel(), 'eeeee')
+MySubCui2(Toplevel(), 'yyyyy')
+mainloop()
