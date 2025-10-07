@@ -229,10 +229,11 @@ class MySubCui2(MyGui):
         Label(datatime, text=datetime.datetime.now(), bg='blue', fg=color).pack()
 
 
-#        L.config(fg=color)
-
 MyGui(Tk(), 'main')
 MyGui(Toplevel())
 MySubGui(Toplevel(), 'eeeee')
 MySubCui2(Toplevel(), 'yyyyy')
 mainloop()
+
+
+"Exercise 7 Утилита для просмотра и обслуживания входящих сообщений электронной почты"
