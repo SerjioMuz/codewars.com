@@ -237,3 +237,37 @@ mainloop()
 
 
 "Exercise 7 Утилита для просмотра и обслуживания входящих сообщений электронной почты"
+import imaplib, getpass, sys
+mailserver='imap.ukr.net'
+mailuser='muzikant_s_v@ukr.net'
+mailpassword=getpass.getpass('Password for %s?' % mailserver)
+
+print('Connecting...')
+server=imaplib.imap(mailserver)
+server.user(mailuser)
+server.pass_(mailpassword)
+
+try:
+    print(server.getwelcome())
+    msgCount, mboxSize=server.stat()
+    print('There are', msgCount, 'mail messages, size', mboxSize)
+    msginfo=server.list()
+    print(msginfo)
+    for i in range(msgCount):
+        msgnum=i+1
+        msgsize=msginfo[1][i]
+        resp, hdrlines,octets=server.top(msgnum, 0)
+        print('-'*80)
+        print('[%d: octets=%d, size=%s]' % (msgnum, octets, msgsize))
+        for line in hdrlines: print(line)
+        if input ('Print') in ['y','Y']:
+            for line in server.retr(msgnum)[1]: print(line)
+        if input('Delete') in ['y','Y']:
+            print('Deleting')
+            server.dele(msgnum)
+        else:
+            print('Skipping')
+finally:
+    server.quit()
+input('Bye.')
+
