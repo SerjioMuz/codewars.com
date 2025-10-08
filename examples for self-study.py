@@ -322,3 +322,102 @@ if __name__ == "__main__":
     server = HTTPServer(("localhost", 8000), SimpleHandler)
     print("Сервер запущен: http://localhost:8000")
     server.serve_forever()
+
+
+
+'ВТОРОЙ ВАРИАНТ'
+#!/usr/bin/python3
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs
+import html  # Для безопасного вывода пользовательского ввода
+
+class SimpleHandler(BaseHTTPRequestHandler):
+    def _render_template(self, content):
+        """Шаблон базовой HTML-страницы"""
+        return f"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Reply Page</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 40px;
+        }}
+        .container {{
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }}
+        h1 {{ color: #333; }}
+        input[type="text"] {{
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }}
+        input[type="submit"] {{
+            padding: 8px 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }}
+        input[type="submit"]:hover {{
+            background-color: #45a049;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        {content}
+    </div>
+</body>
+</html>"""
+
+    def do_GET(self):
+        """Отображает форму"""
+        html_form = """
+            <h1>Введите своё имя</h1>
+            <form method="POST">
+                <input type="text" name="user" placeholder="Ваше имя">
+                <input type="submit" value="Отправить">
+            </form>
+        """
+        page = self._render_template(html_form)
+        self._send_html(page)
+
+    def do_POST(self):
+        """Обрабатывает данные формы"""
+        length = int(self.headers.get("Content-Length", 0))
+        post_data = self.rfile.read(length).decode("utf-8")
+        params = parse_qs(post_data)
+        user = html.escape(params.get("user", ["Гость"])[0])  # защита от XSS
+
+        html_reply = f"""
+            <h1>Привет, <i>{user}</i>!</h1>
+            <a href="/">Вернуться назад</a>
+        """
+        page = self._render_template(html_reply)
+        self._send_html(page)
+
+    def _send_html(self, content):
+        """Отправляет HTML-ответ"""
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(content.encode("utf-8"))
+
+if __name__ == "__main__":
+    server = HTTPServer(("localhost", 8000), SimpleHandler)
+    print("✅ Сервер запущен: http://localhost:8000")
+    print("Нажмите Ctrl+C для остановки.")
+    server.serve_forever()
+
+
