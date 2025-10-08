@@ -421,3 +421,63 @@ if __name__ == "__main__":
     server.serve_forever()
 
 
+"Exercise 9 Сценарий для заполнения базы данных shelve объектами Python"
+rec1 = {'name': {'first': 'Bob', 'last' : 'Smith'},
+        'job': ['dev', 'mgr'],
+        'age': 40.5}
+rec2 = {'name': {'first':'Sue', 'last':'Jones'},
+        'job': ['mgr'],
+        'age': 35.0}
+
+import shelve
+db = shelve.open('dbfile')
+db['bob'] = rec1
+db['sue'] = rec2
+db.close ()
+
+
+
+"Exercise 10 Сценарий для вывода и заполнения базы данных shelve"
+import shelve
+db = shelve.open('dbfile')
+for key in db:
+    print(key, '=>', db[key])
+bob = db [' bob']
+bob['age'] += 1
+db['bob'] = bob
+db.close()
+
+
+"Exercise 11 Сценарий для заполнения и запрашивания базы данных MySql"
+from MySQLdb import Connect
+conn = Connect(host='localhost', user='root', passwd='root1234+ROOT')
+curs = conn.cursor()
+try:
+    curs.execute('drop database testpeopledb')
+except:
+    pass                                                        # He существует
+curs.execute('create database testpeopledb')
+curs.execute('use testpeopledb')
+curs.execute('create table people (name char(30), job char(10), pay int(4))')
+curs.execute('insert people values (%s, %s, %s)', ('Bob', 'dev', 50000))
+curs.execute('insert people values (%s, %s, %s) ' , ('Sue', 'dev', 60000))
+curs.execute('insert people values (%s, %s, %s)', ('Ann', 'mgr', 40000))
+curs.execute('insert people values (%s, %s, %s)', ('Bax', 'mgr', 50000))
+curs.execute('insert people values (%s, %s, %s)', ('Nas', 'mgr', 70000))
+curs.execute('insert people values (%s, %s, %s)', ('Vik', 'mgr', 80000))
+
+curs.execute('select * from people')
+for row in curs. fetchall ():
+    print(row)
+curs.execute('select * from people where name = %s', ('Bob',))
+print(curs.description)
+colnames = [desc[0] for desc in curs.description]
+while True:
+    print('-' * 30)
+    row = curs.fetchone()
+    if not row: break
+    for (name, value) in zip(colnames, row):
+        print('%s => %s' % (name, value))
+conn.commit()                                                     # Сохранить
+
+
