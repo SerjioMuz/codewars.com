@@ -271,3 +271,54 @@ finally:
     server.quit()
 input('Bye.')
 
+
+"Exercise 8 Серверный сценарий CGI для взаимодействия с веб-браузером"
+#!/usr/bin/python3
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from urllib.parse import parse_qs
+
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        # Отправляем форму пользователю
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"""
+            <html>
+            <head><title>Reply Page</title></head>
+            <body>
+                <form method="POST">
+                    <label>Enter your name:</label>
+                    <input type="text" name="user">
+                    <input type="submit" value="Send">
+                </form>
+            </body>
+            </html>
+        """)
+
+    def do_POST(self):
+        # Получаем данные формы
+        content_length = int(self.headers.get('Content-Length', 0))
+        post_data = self.rfile.read(content_length).decode('utf-8')
+        params = parse_qs(post_data)
+        user = params.get('user', ['Гость'])[0]
+
+        # Формируем HTML-ответ
+        self.send_response(200)
+        self.send_header("Content-type", "text/html; charset=utf-8")
+        self.end_headers()
+        html = f"""
+            <html>
+            <head><title>Reply Page</title></head>
+            <body>
+                <h1>Hello, <i>{user}</i>!</h1>
+                <a href="/">Вернуться</a>
+            </body>
+            </html>
+        """
+        self.wfile.write(html.encode('utf-8'))
+
+if __name__ == "__main__":
+    server = HTTPServer(("localhost", 8000), SimpleHandler)
+    print("Сервер запущен: http://localhost:8000")
+    server.serve_forever()
