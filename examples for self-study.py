@@ -481,3 +481,37 @@ while True:
 conn.commit()                                                     # Сохранить
 
 
+"Exercise 12 Извлечение и открытие файла по протоколу FTP"
+import webbrowser, sys
+from ftplib import FTP
+from getpass import getpass
+
+nonpassive = False  # использовать активный режим FTP?
+
+filename = input('File? ')
+dirname = input('Dir? ') or '.'
+sitename = input('Site? ')
+user = input('User? ')  # Enter — для анонимного входа
+
+if not user:
+    userinfo = ()
+else:
+    userinfo = (user, getpass('Pswd? '))
+
+print('Connecting...')
+connection = FTP(sitename)
+connection.login(*userinfo)
+connection.cwd(dirname)
+
+if nonpassive:
+    connection.set_pasv(False)
+
+print('Downloading...')
+with open(filename, 'wb') as localfile:
+    connection.retrbinary('RETR ' + filename, localfile.write, 1024)
+
+connection.quit()
+print('Playing...')
+webbrowser.open(filename)
+
+
