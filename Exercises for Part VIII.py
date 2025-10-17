@@ -62,3 +62,13 @@ class Person:
         print('remove...')
         del self._name
     name = property(getName, setName, delName, "name property docs")
+
+
+class PropSquare:
+    def __init__ (self, start):
+        self.value = start
+    def getX(self):
+        return self.value ** 2
+    def setX(self, value):
+        self.value = value
+    X = property(getX, setX)
