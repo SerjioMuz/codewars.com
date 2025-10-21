@@ -152,7 +152,7 @@ class CalcAttrs:
 class InstState:
     def __get__(self, instance, owner):
         print ('InstState get')
-        return instance._Х * 10
+        return instance._X*10
     def __set__ (self, instance, value):
         print('InstState set')
         instance._X = value
@@ -163,3 +163,21 @@ class CalcAttrs:
     def __init__ (self) :
         self._X = 2
         self.Z = 4
+
+
+
+class DescBoth:
+    def __init__(self, data):
+        self .data = data
+    def __get__ (self, instance, owner):
+        print('get')
+        return '%s, %s' % (self.data, instance.data)
+    def __set__(self, instance, value):
+        print('set')
+        instance.data = value
+
+class Client:
+    def __init__ (self, data) :
+        self.data = data
+    managed = DescBoth('spam')
+
