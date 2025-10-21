@@ -72,3 +72,94 @@ class PropSquare:
     def setX(self, value):
         self.value = value
     X = property(getX, setX)
+
+
+class Descriptor:
+    def __get__(self, instance, owner):
+        print(self, instance, owner, sep='\n')
+class Subject:
+    attr=Descriptor()
+
+class Name:
+    "name descriptor docs"
+    def __get__(self, instance, owner):
+        print('fetch...')
+        return instance._name
+    def __set__ (self, instance, value):
+        print('change. . .')
+        instance._name = value
+    def __delete__(self, instance):
+        print('remove...')
+        del instance._name
+
+class Person:
+    def __init__ (self, name):
+        self._name = name
+    name = Name ()
+
+
+class Person:
+    def __init__ (self, name):
+        self._name = name
+    name = Name()
+    class Name:
+        "name descriptor docs"
+        def __get__(self, instance, owner):
+            print('fetch...')
+            return instance._name
+        def __set__(self, instance, value):
+            print('change. . .')
+            instance._name = value
+        def __delete__(self, instance):
+            print('remove...')
+            del instance._name
+
+
+
+class DescSquare:
+    def __init__(self, start):
+        self.value=start
+    def __get__(self, instance, owner):
+        return self.value**2
+    def __set__(self, instance, value):
+        self.value=value
+
+class Client1:
+    x=DescSquare(3)
+
+class Client2:
+    x=DescSquare(32)
+
+
+class DescState:
+    def __init__(self, value):
+        self.value=value
+    def __get__(self, instance, owner):
+        print('DescState get')
+        return self.value*10
+    def __set__(self, instance, value):
+        print('DescState set')
+        self.value=value
+
+class CalcAttrs:
+    x=DescState(2)
+    y=3
+    def __init__(self):
+        self.z=4
+
+
+
+class InstState:
+    def __get__(self, instance, owner):
+        print ('InstState get')
+        return instance._Х * 10
+    def __set__ (self, instance, value):
+        print('InstState set')
+        instance._X = value
+
+class CalcAttrs:
+    X = InstState ()
+    Y = 3
+    def __init__ (self) :
+        self._X = 2
+        self.Z = 4
