@@ -209,3 +209,38 @@ class Person:
     def setName(self, value): print('setName...')
     name = Property(getName, setName)
 
+class Catcher():
+    def __getattr__(self, name):
+        print('Get: %s' % name)
+    def __setattr__(self, name, value):
+        print('Set: %s %s' % (name, value))
+
+
+class Wrapper:
+    def __init__(self, object):
+        self.wrapper=object
+    def __getattr__(self, attrname):
+        print('Trace:', attrname)
+        return getattr(self.wrapper, attrname)
+
+
+class Person:
+    def init (self, name):
+        self._name = name
+    def __getattr__ (self, attr):
+        print('get:' + attr)
+        if attr == 'name':
+            return self._name
+        else:
+            raise AttributeError(attr)
+    def __setattr__ (self, attr, value):
+        print ('set:' + attr)
+        if attr == ' name ':
+            attr = '_name'
+        self.__diet__[attr] = value
+    def __delattr__(self, attr):
+        print('del:' + attr)
+        if attr == ' name ' :
+            attr = '_name'
+            del self.__dict__ [attr]
+
