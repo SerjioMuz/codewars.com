@@ -298,4 +298,53 @@ class AttrSquare:
         object.__setattr__(self, attr, value)
 
 
+class AttrSquare:
+    def __init__ (self, start):
+        self.value = start
+    def __getattribute__ (self, attr):
+        print('get')
+        if attr == 'X':
+            return object.__getattribute__(self,'value') ** 2
+        else:
+            return object.__getattribute__(self, attr)
+    def __setattr__(self, attr, value):
+        print('set')
+        if attr == 'X':
+            attr = 'value'
+        object.__setattr__(self, attr, value)
 
+
+
+class GetAttr:
+    attr1=1
+    def __init__(self):
+        self.attr2=2
+    def __getattr__(self, attr):
+        print('Get:' +attr)
+        if attr=='attr3':
+            return 3
+        else:
+            raise AttributeError(attr)
+
+X=GetAttr()
+print(X.attr1)
+print(X.attr2)
+print(X.attr3)
+print('-'*20)
+
+class GetAttr:
+    attr1=1
+    def __init__(self):
+        self.attr2=2
+    def __getattribute__(self, attr):
+        print('Get:' +attr)
+        if attr=='attr3':
+            return 3
+        else:
+            return object.__getattribute__(self, attr)
+
+X=GetAttr()
+print(X.attr1)
+print(X.attr2)
+print(X.attr3)
+print('-'*20)
