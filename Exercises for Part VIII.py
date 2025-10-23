@@ -278,3 +278,24 @@ class AttrSquare:
         if attr == 'X':
             attr = 'value'
         self.__dict__[attr] = value
+
+
+
+
+class AttrSquare:
+    def __init__ (self, start):
+        self.value = start
+    def __getattribute__ (self, attr):
+        print('get')
+        if attr == 'X':
+            return self.value ** 2
+        else:
+            return object.__getattribute__(self, attr)
+    def __setattr__(self, attr, value):
+        print('set')
+        if attr == 'X':
+            attr = 'value'
+        object.__setattr__(self, attr, value)
+
+
+
