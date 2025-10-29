@@ -30,3 +30,11 @@ if __name__ == '__main__':
         sue.acct = '1234567'
     except:
         print ('Bad acct for Sue')
+    print(bob.name)
+    print(bob.age)
+    print(bob.acct)
+    print(bob.addr)
+    print(sue.name)
+    print(sue.age)
+    print(sue.acct)
+    print(sue.addr)

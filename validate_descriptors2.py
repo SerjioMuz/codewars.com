@@ -1,3 +1,6 @@
+from os.path import split
+
+
 class CardHolder:
     acctlen = 8
     retireage =59.5
@@ -43,3 +46,5 @@ class CardHolder:
                 raise TypeError ('cannot set remain')
     remain = Remain()
 
+bob = CardHolder('1234-5678', 'Bob Smith', 40, '123 main st')
+print(bob.name, bob.age, bob.addr, bob.remain)
