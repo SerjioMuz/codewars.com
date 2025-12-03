@@ -17,11 +17,13 @@ class Person:
 
 
 persinfo('Bob Smith', 45)
-persinfo('Bob Smith', 200)
+#persinfo('Bob Smith', 200)
 birthday(5, 31, 1963)
-birthday(5, 32, 1963)
+#birthday(5, 32, 1963)
 sue = Person('Sue Jones', 'dev', 100000)
 sue . giveRaise (.10)
 print (sue .pay)
-sue.giveRaise(1.10)
-print(sue.pay)
+#sue.giveRaise(1.10)
+#print(sue.pay)
+
+
