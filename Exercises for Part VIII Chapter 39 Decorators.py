@@ -702,3 +702,17 @@ print (sue .pay)
 
 
 
+def rangetest(func):
+    def onCall(*pargs, **kargs):
+        argchecks = func.__annotations__
+        print(argchecks)
+        for check in argchecks:
+            pass
+        return func(*pargs, **kargs)
+    return (onCall)
+
+@rangetest
+def func (a: (1, 5), b, c:(0.0, 1.0)):
+    print (a + b + c)
+
+func(1, 2, c=3)
