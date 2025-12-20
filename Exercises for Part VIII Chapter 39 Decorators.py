@@ -716,3 +716,6 @@ def func (a: (1, 5), b, c:(0.0, 1.0)):
     print (a + b + c)
 
 func(1, 2, c=3)
+
+
+
