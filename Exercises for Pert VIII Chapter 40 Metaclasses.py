@@ -176,3 +176,27 @@ class Client1(metaclass=Extender) :
 
 class Client2(metaclass=Extender):
     value = ' ni? '
+
+
+
+#______________________________________________________________________________
+class Metaclass (type) :
+    def __new__(meta, clsname, supers, attrdict):
+        print ('In M.__ new__ : ')
+        print([clsname, supers, list(attrdict.keys())])
+        return type.__new__ (meta, clsname, supers, attrdict)
+
+def decorator(cls):
+    return Metaclass(cls.__name__, cls.__bases__ , dict(cls.__dict__))
+
+class A:
+    x = 1
+
+@decorator
+class B(A):
+    y = 2
+    def m(self): return self.x + self.y
+
+B.x, B.y
+I=B()
+I.x, I.y, I.m()
