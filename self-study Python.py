@@ -1,0 +1,5 @@
+_str=input("Введите текст")
+cod_str=_str.encode("utf-8")
+print('Тип объекта %s \nДлинна строки %s \nДлинна байтов %s' % (type(cod_str), len(_str), len(cod_str)))
+decod_str=cod_str.decode("utf-8")
+print('Проверка равенства строк', _str==decod_str)
