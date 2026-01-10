@@ -33,7 +33,7 @@ print(normalize(('привет мир').encode()))
 print(normalize(123))"""
 
 
-class User:
+"""class User:
     def __init__(self, name):
         object.__setattr__(self, '_name', name)
 
@@ -46,7 +46,43 @@ class User:
     def __setattr__(self, attr, value):
         if attr == 'name':
             raise AttributeError('Атрибут name доступен только для чтения')
-        object.__setattr__(self, attr, value)
+        object.__setattr__(self, attr, value)"""
 
+
+
+"""def tracer(func):
+    def wrapper(*args, **kwargs):
+        print('Вызов %s с аргументами %s' % (func.__name__, args))
+        return func(*args, **kwargs)
+    return wrapper
+
+
+from functools import wraps
+
+def tracer(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print(f'Вызов {func.__name__} с аргументами {args}')
+        return func(*args, **kwargs)
+    return wrapper
+
+@tracer
+def add(a, b) :
+    return (a + b)
+
+result=add(2,3)
+print(result)
+print(add.__name__)"""
+
+
+
+class RequireID(type):
+    def __new__(cls, name, bases, attrs):
+        if 'id' not in attrs:
+            raise TypeError(f'Класс {name} должен содержать атрибут id')
+        return type.__new__(cls, name, bases, attrs)
+
+class User(metaclass=RequireID):
+    id =1
 
 
