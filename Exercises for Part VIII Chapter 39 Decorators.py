@@ -233,7 +233,7 @@ class Person:
 
 
 
-lass tracer:
+class tracer:
     def __init__(self, func):
         self.calls = 0
         self.func = func
